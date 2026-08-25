@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="dark light">
+<title>競艇 選手年次データ</title>
+<style>
+:root{--bg:#07111f;--panel:#0d1b2d;--card:#12243a;--line:#26394f;--text:#eef5fb;--muted:#9fb0c3;--accent:#4db6ff;--good:#66d19e;--warn:#ffd166;--danger:#ff7b7b}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#07111f 0,#0a1626 100%);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif;min-height:100vh}.app{max-width:1180px;margin:auto;padding:18px 14px 50px}.top{display:flex;gap:14px;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;margin-bottom:16px}.title h1{font-size:clamp(22px,5vw,34px);margin:0 0 5px}.title p{margin:0;color:var(--muted);font-size:13px}.year-switch{display:flex;background:#091727;border:1px solid var(--line);border-radius:12px;padding:4px;gap:4px}.year-btn{border:0;border-radius:9px;background:transparent;color:var(--muted);padding:10px 18px;font-size:16px;font-weight:800;cursor:pointer}.year-btn.active{background:var(--accent);color:#06101a}.status{border:1px solid var(--line);background:var(--panel);border-radius:12px;padding:11px 13px;margin-bottom:14px;color:var(--muted);font-size:13px}.status strong{color:var(--text)}.status.warning{border-color:#6e5a22;background:#211c0e;color:#f4d878}.searchbox{position:relative;margin-bottom:14px}.searchbox input{width:100%;height:50px;border:1px solid var(--line);border-radius:13px;background:#0c1c2e;color:var(--text);font-size:16px;padding:0 15px;outline:none}.searchbox input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(77,182,255,.13)}.suggestions{position:absolute;left:0;right:0;top:55px;z-index:20;background:#102238;border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:0 12px 30px rgba(0,0,0,.35);display:none;max-height:330px;overflow-y:auto}.suggestions.show{display:block}.suggestion{width:100%;border:0;border-bottom:1px solid var(--line);background:transparent;color:var(--text);padding:12px 14px;text-align:left;cursor:pointer;font-size:15px}.suggestion:last-child{border-bottom:0}.suggestion small{color:var(--muted);margin-left:8px}.empty{padding:26px 18px;text-align:center;border:1px dashed var(--line);border-radius:14px;color:var(--muted);background:rgba(13,27,45,.5)}.profile{display:none}.profile.show{display:block}.hero{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(240px,.7fr);gap:14px;margin-bottom:14px}.racer-card,.card{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:16px}.racer-name{font-size:28px;font-weight:900;margin-bottom:5px}.racer-sub{color:var(--muted);font-size:13px}.metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.metric{background:var(--card);border-radius:11px;padding:12px}.metric .label{color:var(--muted);font-size:12px}.metric .value{font-size:22px;font-weight:900;margin-top:3px}.metric .unit{font-size:12px;color:var(--muted)}.section{margin-top:16px}.section-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:0 1px 9px}.section-head h2{font-size:18px;margin:0}.section-head span{font-size:12px;color:var(--muted)}.scroll{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--panel)}table{width:100%;border-collapse:collapse;min-width:670px}th,td{padding:10px 10px;border-bottom:1px solid var(--line);text-align:right;font-variant-numeric:tabular-nums}th{font-size:12px;color:var(--muted);font-weight:700;background:#0b1929;position:sticky;top:0}th:first-child,td:first-child{text-align:left}tr:last-child td{border-bottom:0}.course-tag{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;font-weight:900;border:1px solid rgba(255,255,255,.18)}.c1{background:#fff;color:#111}.c2{background:#20252b;color:#fff}.c3{background:#d83b3b;color:#fff}.c4{background:#3688de;color:#fff}.c5{background:#f1cf3b;color:#111}.c6{background:#37a965;color:#fff}.tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:3px;margin-bottom:9px}.tab{white-space:nowrap;border:1px solid var(--line);background:#0a1828;color:var(--muted);border-radius:9px;padding:9px 13px;font-weight:700;cursor:pointer}.tab.active{background:var(--accent);color:#06101a;border-color:var(--accent)}.bars{display:grid;gap:9px}.bar-row{display:grid;grid-template-columns:90px 1fr 60px;gap:10px;align-items:center}.bar-label{font-weight:700}.bar-track{height:12px;border-radius:99px;background:#1b3045;overflow:hidden}.bar-fill{height:100%;background:linear-gradient(90deg,#47aef2,#66d19e);border-radius:99px}.bar-count{text-align:right;font-variant-numeric:tabular-nums}.venue-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.venue-btn{min-width:0;border:1px solid var(--line);background:#0e2034;color:var(--text);border-radius:10px;padding:10px 8px;text-align:left;cursor:pointer}.venue-btn strong{display:block}.venue-btn small{color:var(--muted)}.venue-btn.active{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}.note{margin-top:16px;color:var(--muted);font-size:12px;line-height:1.7}.hidden{display:none!important}@media(max-width:760px){.hero{grid-template-columns:1fr}.venue-grid{grid-template-columns:repeat(2,1fr)}.metrics{grid-template-columns:repeat(2,1fr)}.racer-name{font-size:24px}.app{padding:14px 10px 36px}}@media(max-width:380px){.venue-grid{grid-template-columns:1fr}.year-btn{padding:9px 13px}.metric .value{font-size:19px}}
+</style>
+</head>
+<body>
+<div class="app" id="app">
+  <div class="top">
+    <div class="title"><h1>競艇 選手年次データ</h1><p>BOAT RACE公式競走成績から年単位で集計</p></div>
+    <div class="year-switch" aria-label="年選択">
+      <button class="year-btn active" type="button" data-year="2025">2025</button>
+      <button class="year-btn" type="button" data-year="2026">2026</button>
+    </div>
+  </div>
+
+  <div class="status" id="status"></div>
+  <div class="searchbox">
+    <input id="search" type="search" autocomplete="off" placeholder="選手名 または 登録番号で検索" aria-label="選手検索">
+    <div id="suggestions" class="suggestions"></div>
+  </div>
+
+  <div id="empty" class="empty">選手名または登録番号を入力してください。</div>
+
+  <main id="profile" class="profile">
+    <div class="hero">
+      <section class="racer-card">
+        <div id="racerName" class="racer-name"></div>
+        <div id="racerSub" class="racer-sub"></div>
+      </section>
+      <section class="metrics">
+        <div class="metric"><div class="label">出走数</div><div class="value" id="mStarts">-</div></div>
+        <div class="metric"><div class="label">1着率</div><div class="value" id="mWin">-</div></div>
+        <div class="metric"><div class="label">2連対率</div><div class="value" id="mTop2">-</div></div>
+        <div class="metric"><div class="label">平均ST</div><div class="value" id="mSt">-</div></div>
+      </section>
+    </div>
+
+    <section class="section">
+      <div class="section-head"><h2>コース別成績</h2><span>実際の進入コースで集計</span></div>
+      <div class="scroll"><table>
+        <thead><tr><th>コース</th><th>出走</th><th>1着</th><th>1着率</th><th>2連対率</th><th>3連対率</th><th>平均ST</th></tr></thead>
+        <tbody id="courseBody"></tbody>
+      </table></div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><h2>1着時の決まり手</h2><span>年内の1着レースのみ</span></div>
+      <div class="card"><div id="techBars" class="bars"></div></div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><h2>場別成績</h2><span>全国24場</span></div>
+      <div id="venueGrid" class="venue-grid"></div>
+    </section>
+
+    <section class="section" id="venueDetailSection">
+      <div class="section-head"><h2 id="venueDetailTitle">場×コース</h2><span>選択した競艇場</span></div>
+      <div class="scroll"><table>
+        <thead><tr><th>コース</th><th>出走</th><th>1着</th><th>1着率</th><th>2連対率</th><th>3連対率</th><th>平均ST</th></tr></thead>
+        <tbody id="venueCourseBody"></tbody>
+      </table></div>
+    </section>
+  </main>
+
+  <div class="note">「1着率」は競走成績から <strong>1着回数÷出走数</strong> で算出しています。BOAT RACE公式の期別成績にある「勝率」とは別の指標です。データ元：BOAT RACE公式 競走成績ダウンロード。</div>
+</div>
+<script>
+(function(){
+'use strict';
+let D={years:{},venues:{}};
+let year='2025',selected=null,selectedVenue=null;
+const loadedYears=new Set();
+D.venues={
+'01':'桐生','02':'戸田','03':'江戸川','04':'平和島','05':'多摩川','06':'浜名湖','07':'蒲郡','08':'常滑','09':'津','10':'三国','11':'びわこ','12':'住之江','13':'尼崎','14':'鳴門','15':'丸亀','16':'児島','17':'宮島','18':'徳山','19':'下関','20':'若松','21':'芦屋','22':'福岡','23':'唐津','24':'大村'
+};
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const pct=v=>Number.isFinite(Number(v))?Number(v).toFixed(1)+'%':'-';
+const st=v=>v===null||v===undefined?'-':Number(v).toFixed(3);
+const norm=s=>String(s||'').toLowerCase().replace(/[\s　]+/g,'');
+
+function yearData(){return D.years?.[year]||{racers:[],status:'loading',from:`${year}-01-01`,to:null};}
+async function loadYear(y){
+  y=String(y);
+  if(loadedYears.has(y)) return true;
+  const el=$('status');
+  el.className='status';
+  el.innerHTML=`<strong>${y}年</strong>：データを読み込み中…`;
+  try{
+    const res=await fetch(`./data/${y}.json`,{cache:'no-store'});
+    if(!res.ok) throw new Error(`HTTP ${res.status}`);
+    const obj=await res.json();
+    const yearObj=obj.yearData||obj;
+    if(!Array.isArray(yearObj.racers)) throw new Error('racers がありません');
+    D.years[y]=yearObj;
+    if(obj.venues) D.venues=obj.venues;
+    loadedYears.add(y);
+    return true;
+  }catch(err){
+    D.years[y]={racers:[],status:'load-error',from:`${y}-01-01`,to:null,error:String(err)};
+    return false;
+  }
+}
+function setStatus(){
+ const y=yearData(),el=$('status');
+ if(!Array.isArray(y.racers)||!y.racers.length){
+   el.className='status warning';
+   el.innerHTML=`<strong>${year}年</strong>：data/${year}.json を読み込めませんでした。GitHubにJSONファイルが入っているか確認してください。`;
+ }else{
+   el.className='status';
+   el.innerHTML=`<strong>${year}年</strong>　集計期間 ${esc(y.from)} ～ ${esc(y.to||'')}　／ レース ${Number(y.raceCount||0).toLocaleString()}　／ 選手 ${Number(y.racerCount||y.racers.length).toLocaleString()}人`;
+ }
+}
+async function chooseYear(y){year=String(y);selected=null;selectedVenue=null;document.querySelectorAll('.year-btn').forEach(b=>b.classList.toggle('active',b.dataset.year===year));$('search').value='';$('suggestions').classList.remove('show');$('profile').classList.remove('show');$('empty').classList.remove('hidden');$('empty').textContent='データを読み込んでいます…';await loadYear(year);$('empty').textContent=yearData().racers?.length?'選手名または登録番号を入力してください。':`${year}年のデータがありません。`;setStatus();}
+function searchRacers(q){q=norm(q);if(!q)return[];return (yearData().racers||[]).filter(r=>norm(r.name).includes(q)||String(r.reg).includes(q)).slice(0,30);}
+function renderSuggestions(){const q=$('search').value.trim(),items=searchRacers(q),box=$('suggestions');if(!q||!items.length){box.classList.remove('show');box.innerHTML='';return}box.innerHTML=items.map((r,i)=>`<button type="button" class="suggestion" data-i="${i}">${esc(r.name)} <small>${esc(r.reg)}</small></button>`).join('');box.classList.add('show');box.querySelectorAll('button').forEach((b,i)=>b.addEventListener('click',()=>selectRacer(items[i])));}
+function tableRow(course,b){return `<tr><td><span class="course-tag c${course}">${course}</span></td><td>${b?.starts||0}</td><td>${b?.wins||0}</td><td>${pct(b?.winRate||0)}</td><td>${pct(b?.top2Rate||0)}</td><td>${pct(b?.top3Rate||0)}</td><td>${st(b?.avgSt)}</td></tr>`;}
+function renderCourses(r){$('courseBody').innerHTML=[1,2,3,4,5,6].map(c=>tableRow(c,r.courses?.[String(c)]||{})).join('');}
+function renderTech(r){const t=r.techniques||{},order=['逃げ','差し','まくり','まくり差し','抜き','恵まれ','その他'];const rows=order.filter(k=>(t[k]||0)>0);const max=Math.max(1,...rows.map(k=>t[k]||0));$('techBars').innerHTML=rows.length?rows.map(k=>`<div class="bar-row"><div class="bar-label">${esc(k)}</div><div class="bar-track"><div class="bar-fill" style="width:${(t[k]/max*100).toFixed(1)}%"></div></div><div class="bar-count">${t[k]}回</div></div>`).join(''):'<div style="color:var(--muted)">1着データなし</div>';}
+function renderVenues(r){const grid=$('venueGrid');grid.innerHTML=Object.entries(D.venues||{}).map(([code,name])=>{const b=r.venues?.[code]||{};return `<button type="button" class="venue-btn" data-code="${code}"><strong>${esc(name)}</strong><small>${b.starts||0}走　1着率 ${pct(b.winRate||0)}</small></button>`}).join('');grid.querySelectorAll('.venue-btn').forEach(b=>b.addEventListener('click',()=>selectVenue(b.dataset.code)));const first=Object.keys(r.venues||{}).sort((a,b)=>(r.venues[b]?.starts||0)-(r.venues[a]?.starts||0))[0];selectVenue(first||'01');}
+function selectVenue(code){if(!selected)return;selectedVenue=code;document.querySelectorAll('.venue-btn').forEach(b=>b.classList.toggle('active',b.dataset.code===code));const name=D.venues?.[code]||code;$('venueDetailTitle').textContent=`${name} × コース別`;$('venueCourseBody').innerHTML=[1,2,3,4,5,6].map(c=>tableRow(c,selected.venueCourses?.[code]?.[String(c)]||{})).join('');}
+function selectRacer(r){selected=r;$('search').value=`${r.name} (${r.reg})`;$('suggestions').classList.remove('show');$('empty').classList.add('hidden');$('profile').classList.add('show');$('racerName').textContent=r.name||'名称不明';$('racerSub').textContent=`登録番号 ${r.reg} ／ ${year}年`;
+ const o=r.overall||{};$('mStarts').textContent=(o.starts||0).toLocaleString();$('mWin').textContent=pct(o.winRate||0);$('mTop2').textContent=pct(o.top2Rate||0);$('mSt').textContent=st(o.avgSt);renderCourses(r);renderTech(r);renderVenues(r);}
+
+document.querySelectorAll('.year-btn').forEach(b=>b.addEventListener('click',()=>chooseYear(b.dataset.year)));
+$('search').addEventListener('input',renderSuggestions);
+$('search').addEventListener('keydown',e=>{if(e.key==='Enter'){const m=searchRacers($('search').value)[0];if(m){e.preventDefault();selectRacer(m)}}if(e.key==='Escape')$('suggestions').classList.remove('show')});
+document.addEventListener('click',e=>{if(!e.target.closest('.searchbox'))$('suggestions').classList.remove('show')});
+chooseYear('2025');
+})();
+</script>
+</body>
+</html>
